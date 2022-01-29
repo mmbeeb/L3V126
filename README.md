@@ -12,3 +12,5 @@ If that fails, it asks the user to enter the data & time, and maintains it using
 Further byte saving code changes.
 
 Some slight changes to how the network is dealt with as to improve how my FSEM emulator will deal with network rx/tx timing.
+
+To assemble, in a Command Prompt window (Windows), select directory, and enter: beebasm -i FS3.asm
