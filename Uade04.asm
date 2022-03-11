@@ -534,7 +534,8 @@ ENDIF
 	AND #3
 	BNE CHKDNG
 .DTOK
-	CLC
+	LDA DYEAR,Y
+	CMP #100
 	RTS
 .CHKDNG
 	SEC
@@ -1406,7 +1407,7 @@ ENDIF
 {
 	;Read RTC, using OSWORD 14
 	LDX #0
-	STX	DDAY
+	STX DDAY
 	STX DMONTH
 	INX
 	STX DBLK		;Function 1 == Return BCD clock value
@@ -1416,9 +1417,9 @@ ENDIF
 	LDA #14
 	JSR OSWORD
 
-	LDA DDAY
-	ORA DMONTH
-	BEQ J3			;If failed
+	LDY #0
+	JSR CHKDTE
+	BCS J3			;Invalid date
 	
 	;If successful, on exit values in BCD are:
 	;DBLK	?0 = year	(&00-&99)
